@@ -81,7 +81,7 @@ class SpatialAnalysis {
     }
 
     onDrawDeleted(e) {
-        // No action needed for deleted layers
+        // No action needed
     }
 
     async performBufferAnalysis(layer) {
@@ -154,16 +154,6 @@ class SpatialAnalysis {
         this.showAnalysisResults(layer, `Area Calculation: ${areaKm2.toFixed(2)} km²`);
     }
 
-    async searchFeatures(query) {
-        try {
-            const features = await this.dataModule.searchData(query);
-            this.showAnalysisResults(features, 'Search Results');
-        } catch (error) {
-            console.error('Search error:', error);
-            this.showMessage('Error searching features');
-        }
-    }
-
     calculateDistance(point1, point2) {
         const R = 6371e3;
         const φ1 = point1.lat * Math.PI / 180;
@@ -181,14 +171,12 @@ class SpatialAnalysis {
 
     calculateDistanceToPolygon(point, polygonPoints) {
         let minDistance = Infinity;
-
         for (let i = 0; i < polygonPoints.length; i++) {
             const p1 = polygonPoints[i];
             const p2 = polygonPoints[(i + 1) % polygonPoints.length];
             const distance = this.calculateDistanceToLine(point, p1, p2);
             minDistance = Math.min(minDistance, distance);
         }
-
         return minDistance;
     }
 
