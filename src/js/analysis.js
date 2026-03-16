@@ -90,10 +90,9 @@ class SpatialAnalysis {
             return;
         }
 
-        const radius = layer.getRadius(); // in meters
+        const radius = layer.getRadius();
         const center = layer.getLatLng();
 
-        // Get features within buffer distance
         const features = await this.dataModule.getLocalData();
         const bufferedFeatures = features.filter(feature => {
             if (!feature.geometry || !feature.geometry.coordinates) return false;
@@ -105,7 +104,6 @@ class SpatialAnalysis {
                     lng: feature.geometry.coordinates[0]
                 });
             } else if (feature.geometry.type === 'LineString') {
-                // For lines, check if any point is within buffer
                 const linePoints = feature.geometry.coordinates.map(coord => ({
                     lat: coord[1],
                     lng: coord[0]
@@ -115,7 +113,6 @@ class SpatialAnalysis {
                     return Math.min(minDist, dist);
                 }, Infinity);
             } else if (feature.geometry.type === 'Polygon') {
-                // For polygons, check if center is inside or distance to boundary
                 const polygonPoints = feature.geometry.coordinates[0].map(coord => ({
                     lat: coord[1],
                     lng: coord[0]
@@ -153,7 +150,7 @@ class SpatialAnalysis {
         }
 
         const area = layer.getArea();
-        const areaKm2 = area / 1000000; // Convert m² to km²
+        const areaKm2 = area / 1000000;
         this.showAnalysisResults(layer, `Area Calculation: ${areaKm2.toFixed(2)} km²`);
     }
 
@@ -168,7 +165,7 @@ class SpatialAnalysis {
     }
 
     calculateDistance(point1, point2) {
-        const R = 6371e3; // Earth's radius in meters
+        const R = 6371e3;
         const φ1 = point1.lat * Math.PI / 180;
         const φ2 = point2.lat * Math.PI / 180;
         const Δφ = (point2.lat - point1.lat) * Math.PI / 180;
@@ -183,7 +180,6 @@ class SpatialAnalysis {
     }
 
     calculateDistanceToPolygon(point, polygonPoints) {
-        // Simple point-to-polygon distance calculation
         let minDistance = Infinity;
 
         for (let i = 0; i < polygonPoints.length; i++) {
@@ -308,7 +304,6 @@ class SpatialAnalysis {
     }
 }
 
-// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = SpatialAnalysis;
 } else {
