@@ -94,7 +94,7 @@ class SpatialAnalysis {
         const center = layer.getLatLng();
 
         // Get features within buffer distance
-        const features = await this.dataModule.getData();
+        const features = await this.dataModule.getLocalData();
         const bufferedFeatures = features.filter(feature => {
             if (!feature.geometry || !feature.geometry.coordinates) return false;
 
