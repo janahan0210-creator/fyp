@@ -146,7 +146,7 @@ class DataModule {
 
         return Object.keys(query).every(key => {
             if (key === 'geometry') {
-                return true; // Geometry queries need special handling
+                return true;
             }
             const value = feature.properties[key];
             const queryValue = query[key];
@@ -245,7 +245,6 @@ class DataModule {
     }
 }
 
-// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = DataModule;
 } else {
