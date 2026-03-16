@@ -36,7 +36,7 @@ class DataModule {
         }
 
         try {
-            const response = await fetch('/src/data/sample-data.geojson');
+            const response = await fetch('data/sample-data.geojson');
             if (response.ok) {
                 const data = await response.json();
                 this.sampleData = data.features || [];
