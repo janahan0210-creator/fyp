@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marine WebGIS PWA</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Marine WebGIS PWA</h1>
+            <div class="nav-actions">
+                <button id="installBtn" class="hidden">Install App</button>
+                <button id="offlineStatus">Online</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="map-controls">
+                <button id="toggleLayers">Layers</button>
+                <button id="analysisTools">Analysis</button>
+                <button id="offlineMode">Offline Mode</button>
+            </div>
+        </div>
+
+        <aside id="sidebar" class="hidden">
+            <div class="sidebar-content">
+                <h2>Features</h2>
+                <div id="featureList"></div>
+                <div id="featureInfo" class="hidden">
+                    <h3>Feature Details</h3>
+                    <div id="featureAttributes"></div>
+                </div>
+            </div>
+        </aside>
+
+        <div id="loading" class="hidden">Loading map...</div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Marine WebGIS PWA - Offline Ready</p>
+    </footer>
+
+    <script src="src/js/indexeddb.js"></script>
+    <script src="src/js/app.js"></script>
+    <script src="src/js/map.js"></script>
+    <script src="src/js/data.js"></script>
+    <script src="src/js/offline.js"></script>
+    <script src="src/js/ui.js"></script>
+</body>
+</html>

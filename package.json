@@ -1,0 +1,24 @@
+{
+  "name": "marine-webgis-pwa",
+  "version": "1.0.0",
+  "description": "Progressive Web App for offline marine spatial analysis",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Build process not required for static PWA'",
+    "test": "echo 'Testing not yet implemented'"
+  },
+  "keywords": [
+    "pwa",
+    "webgis",
+    "marine",
+    "offline",
+    "leaflet",
+    "geojson"
+  ],
+  "author": "Marine WebGIS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
