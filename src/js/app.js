@@ -16,7 +16,6 @@ class MarineWebGIS {
         await this.initializeData();
         this.initializeMap();
         this.initializeAnalysis();
-        // Register service worker
         this.registerServiceWorker();
     }
 
@@ -73,7 +72,6 @@ class MarineWebGIS {
     async deleteFeature(featureId) {
         try {
             await this.indexedDB.deleteData(featureId);
-            // TODO: Remove from map
             this.features = this.features.filter(f => f.id !== featureId);
             this.showMessage('Feature deleted successfully');
         } catch (error) {
@@ -133,17 +131,8 @@ class MarineWebGIS {
         this.showMessage('Edit feature functionality not yet implemented');
     }
 
-    deleteFeature(featureId) {
-        this.deleteFeature(featureId);
-    }
-
     async checkInstallation() {
         if ('getInstalledRelatedApps' in window.navigator) {
-            const app = {
-                platform: 'webapp',
-                url: window.location.href,
-                id: ''
-            };
             const relatedApps = await window.navigator.getInstalledRelatedApps();
             this.installed = relatedApps.filter(app => app.platform === 'webapp').length > 0;
         }
@@ -252,25 +241,6 @@ class MarineWebGIS {
         console.log('Offline mode toggled:', this.offline);
     }
 
-    async loadData() {
-        try {
-            const dataModule = new DataModule();
-            this.features = await dataModule.loadSampleData();
-            console.log('Data loaded:', this.features);
-        } catch (error) {
-            console.error('Error loading data:', error);
-        }
-    }
-
-    initializeMap() {
-        const mapModule = new MapModule();
-        this.map = mapModule.createMap();
-        if (this.features && this.features.length > 0) {
-            mapModule.addFeatures(this.map, this.features);
-        }
-    }
-
-    // Service Worker Registration
     async registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
